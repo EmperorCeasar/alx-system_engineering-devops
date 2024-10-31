@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# This script displays the top 10 IP addresses with the most requests in apache-access.log
+
+if [[ ! -f "apache-access.log" ]]; then
+  echo "Log file apache-access.log not found!"
+  exit 1
+fi
+
+awk '{print $1}' apache-access.log | sort | uniq -c | sort -nr | head -10

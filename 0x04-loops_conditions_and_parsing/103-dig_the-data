@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# This script analyzes the Apache log file and groups data by IP and HTTP status code
+
+awk '{a[$1,$7]++} END {for (i in a) print a[i], i}' apache-access.log | sort -nr
