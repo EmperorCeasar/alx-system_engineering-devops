@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
-# This script analyzes the Apache log file and groups data by IP and HTTP status code
+# This script extracts and sorts unique hostnames from apache-access.log
 
-awk '{a[$1,$7]++} END {for (i in a) print a[i], i}' apache-access.log | sort -nr
+if [[ ! -f "apache-access.log" ]]; then
+  echo "Log file apache-access.log not found!"
+  exit 1
+fi
+
+awk '{print $1}' apache-access.log | sort -u
